@@ -15,7 +15,7 @@ var defaultWrapper, amdWrapper, commonjsWrapper;
 
 var defaults = {
     space: '\t',
-    quote: '\"', // Double quotes being: \'
+    quote: '\"', // Single quotes being: \'
     deps: null,
     stream: false,
     wrap: false,
