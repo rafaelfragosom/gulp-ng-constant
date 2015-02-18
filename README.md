@@ -33,6 +33,7 @@ Based of <a href="https://github.com/werk85/grunt-ng-constant">grunt-ng-constant
   * [deps](#optionsdeps)
   * [wrap](#optionswrap)
   * [space](#optionsspace)
+  * [quote](#optionsquote)
   * [template](#optionstemplate)
   * [templatePath](#optionstemplatepath)
 1. [Examples](#examples)
@@ -193,6 +194,14 @@ Default: `'\t'`
 _optional_
 
 A string that defines how the JSON.stringify method will prettify your code.
+
+#### options.quote
+
+Type: `string`  
+Default: `'\"'`  
+_optional_
+
+A string that defines if the constant file should be built using single or double quotes. Use it if you're using single quotes in your code (removes JSHint warnings for the constant file using double quotes).
 
 #### options.template
 
