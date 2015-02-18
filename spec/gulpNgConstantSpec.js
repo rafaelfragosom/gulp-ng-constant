@@ -4,6 +4,7 @@ var ngConstant = require('../index');
 var _ = require('lodash');
 var gutil = require('gulp-util');
 var through = require('through2');
+var Entities = require('html-entities').XmlEntities;
 
 // TODO: add custom matcher to test the modules name expect(output).toHaveModule('ngConstants') that uses regexp
 // TODO: consider adding a toString() property to the vinyl file (e.g. file.text)
@@ -15,7 +16,7 @@ describe('ngConstant', function () {
             getStream({path: 'myConstantsFile.json'})
             .pipe(ngConstant())
             .on('data', function (file) {
-                expect(file.contents.toString()).toContain('module("myConstantsFile"');
+                expect(markSafe(file.contents)).toContain('module("myConstantsFile"');
                 done();
             });
         });
@@ -30,6 +31,22 @@ describe('ngConstant', function () {
         it ('creates a module with the given name', function (done) {
             evalNgConstant({name: 'myConstantsModule'}, function (_, output) {
                 expect(output).toContain('module("myConstantsModule"');
+                done();
+            });
+        });
+    });
+
+    describe('quotes', function () {
+        it ('generates the module with double quotes by default', function (done) {
+            evalNgConstant({deps: false}, function (_, output) {
+                expect(output).toContain('module("ngConstants")');
+                done();
+            });
+        });
+
+        it ('generates the module with single quotes when assigned', function (done) {
+            evalNgConstant({quote: '\'', deps: false}, function (_, output) {
+                expect(output).toContain('module(\'ngConstants\')');
                 done();
             });
         });
@@ -129,6 +146,11 @@ function getStream(fileOptions) {
 function evalNgConstant(options, callback) {
     var defaults = {stream: true, constants: {greeting: 'hello' }};
     ngConstant(_.merge(defaults, options)).on('data', function (file) {
-        callback(file, file.contents.toString());
+        callback(file, markSafe(file.contents));
     });
+}
+
+function markSafe(str) {
+    var entities = new Entities();
+    return entities.decode(str.toString());
 }

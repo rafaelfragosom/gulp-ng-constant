@@ -15,6 +15,7 @@ var defaultWrapper, amdWrapper, commonjsWrapper;
 
 var defaults = {
     space: '\t',
+    quote: '\"', // Double quotes being: \'
     deps: null,
     stream: false,
     wrap: false,
@@ -51,7 +52,8 @@ function ngConstantPlugin(opts) {
             var result = _.template(template, {
                 moduleName: getModuleName(data, options, file),
                 deps:       getModuleDeps(data, options),
-                constants:  getConstants(data, options)
+                constants:  getConstants(data, options),
+                quote: getModuleQuote(data, options)
             });
 
             // Handle wrapping
@@ -104,6 +106,15 @@ function getConstants(data, options) {
     });
 
     return constants;
+}
+
+function getModuleQuote(data, options) {
+    var quote = options.quote || data.quote;
+    if (!quote) {
+        quote = '\"';
+    }
+
+    return quote;
 }
 
 function getFilePath(filePath, options) {
