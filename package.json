@@ -1,11 +1,11 @@
 {
   "name": "gulp-ng-constant",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Gulp plugin for dynamic generation of angular constant modules.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/guzart/gulp-ng-constant.git"
+    "url": "git://github.com/rafaelfragosom/gulp-ng-constant.git"
   },
   "keywords": [
     "gulp",
@@ -13,12 +13,12 @@
     "constant",
     "gulpplugin"
   ],
-  "author": "Arturo Guzman",
+  "author": "Rafael Fragoso",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/guzart/gulp-ng-constant/issues"
+    "url": "https://github.com/rafaelfragosom/gulp-ng-constant/issues"
   },
-  "homepage": "https://github.com/guzart/gulp-ng-constant",
+  "homepage": "https://github.com/rafaelfragosom/gulp-ng-constant",
   "scripts": {
     "test": "node_modules/jasmine-node/bin/jasmine-node spec/gulpNgConstantSpec.js"
   },
